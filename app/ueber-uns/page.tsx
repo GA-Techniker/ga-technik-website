@@ -37,28 +37,7 @@ const values = [
   },
 ];
 
-const timeline = [
-  {
-    year: '2004',
-    title: 'Gründung',
-    desc: 'GA-Technik wird als Spezialist für MSR-Technik gegründet und übernimmt erste Projekte in der Industrieautomation.',
-  },
-  {
-    year: '2010',
-    title: 'Expansion',
-    desc: 'Erweiterung des Leistungsspektrums um Gebäudeautomation und Energiemanagement. Erste Großprojekte in Gewerbeimmobilien.',
-  },
-  {
-    year: '2016',
-    title: 'Digitalisierung',
-    desc: 'Umstellung auf cloudbasierte Gebäudemanagementsysteme. Investition in KI-gestützte Energieoptimierung.',
-  },
-  {
-    year: '2024',
-    title: 'Heute',
-    desc: 'Heute betreuen wir über 500 Objekte und sind ein etablierter Partner für Smart Building Lösungen im gesamten Bundesgebiet.',
-  },
-];
+
 
 export default function UeberUns() {
   return (
@@ -133,44 +112,7 @@ export default function UeberUns() {
         </div>
       </section>
 
-      {/* Timeline */}
-      <section className="section-padding bg-gray-50 dark:bg-gray-950">
-        <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="inline-block px-4 py-1.5 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-sm font-semibold rounded-full mb-4">
-              Unsere Geschichte
-            </span>
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
-              Meilensteine unserer <span className="gradient-text">Entwicklung</span>
-            </h2>
-          </div>
-          
-          <div className="relative max-w-4xl mx-auto">
-            {/* Line */}
-            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary-200 dark:from-primary-800 via-primary-300 dark:via-primary-700 to-primary-100 dark:to-primary-900 md:-translate-x-px" />
-            
-            <div className="space-y-12">
-              {timeline.map((item, idx) => (
-                <div key={item.year} className={`relative flex flex-col md:flex-row gap-8 ${idx % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
-                  <div className="md:w-1/2 flex md:justify-end">
-                    <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-700 max-w-sm card-hover">
-                      <span className="inline-block px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-sm font-bold rounded-lg mb-3">
-                        {item.year}
-                      </span>
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{item.title}</h3>
-                      <p className="text-gray-600 dark:text-gray-400 text-sm">{item.desc}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="absolute left-8 md:left-1/2 w-4 h-4 bg-primary-600 rounded-full border-4 border-white dark:border-gray-900 shadow-md md:-translate-x-2 mt-6" />
-                  
-                  <div className="md:w-1/2" />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Timeline removed — add real milestones when available */}
 
       {/* Team section - improved with generic team */}
       <section className="section-padding bg-white dark:bg-gray-900">

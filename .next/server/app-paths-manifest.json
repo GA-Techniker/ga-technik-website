@@ -1,9 +1,9 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
   "/page": "app/page.js",
-  "/news/page": "app/news/page.js",
   "/ueber-uns/page": "app/ueber-uns/page.js",
-  "/downloads/page": "app/downloads/page.js",
   "/kontakt/page": "app/kontakt/page.js",
-  "/leistungen/page": "app/leistungen/page.js"
+  "/downloads/page": "app/downloads/page.js",
+  "/leistungen/page": "app/leistungen/page.js",
+  "/news/page": "app/news/page.js"
 }

@@ -178,25 +178,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            {/* Manufacturers */}
-            <div>
-              <span className="inline-block px-4 py-1.5 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-sm font-semibold rounded-full mb-4">
-                Hersteller
-              </span>
-              <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-                Zertifizierte <span className="gradient-text">Hersteller</span>
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
-                Erfahrung mit den führenden Herstellern der Gebäudeautomation – herstellerneutral beraten wir die beste Lösung.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {manufacturers.map((m) => (
-                  <span key={m} className="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-primary-50 dark:hover:bg-primary-900 hover:text-primary-700 dark:hover:text-primary-300 transition-colors">
-                    {m}
-                  </span>
-                ))}
-              </div>
-            </div>
+          {/* Protocols only — no manufacturer logos */}
           </div>
         </div>
       </section>
