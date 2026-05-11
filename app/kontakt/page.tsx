@@ -1,111 +1,234 @@
-'use client';
-
-import { useState } from 'react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
+const contactInfo = [
+  {
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+      </svg>
+    ),
+    label: 'E-Mail',
+    value: 'Info@Ga-Technik.com',
+    href: 'mailto:Info@Ga-Technik.com',
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+      </svg>
+    ),
+    label: 'Telefon',
+    value: '+49 (0) 123 456789',
+    href: 'tel:+49123456789',
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+      </svg>
+    ),
+    label: 'Adresse',
+    value: 'GA-Technik GmbH, Musterstraße 123, 12345 Musterstadt',
+    href: '#',
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+    label: 'Geschäftszeiten',
+    value: 'Mo – Fr: 8:00 – 17:00 Uhr',
+    href: '#',
+  },
+];
+
 export default function Kontakt() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert('Vielen Dank für Ihre Nachricht! Wir melden uns bei Ihnen.');
-    setFormData({ name: '', email: '', subject: '', message: '' });
-  };
-
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <main className="max-w-7xl mx-auto px-4 py-16">
-        <div className="grid md:grid-cols-2 gap-12">
-          <div>
-            <h1 className="text-4xl font-bold text-primary mb-8">Kontakt</h1>
-            <div className="space-y-6 text-gray-700">
-              <div>
-                <h3 className="text-xl font-semibold text-dark mb-2">Adresse</h3>
-                <p>GA-Technik GmbH</p>
-                <p>Musterstraße 123</p>
-                <p>12345 Musterstadt</p>
+
+      {/* Hero */}
+      <section className="pt-32 pb-20 bg-gradient-to-br from-gray-900 via-primary-900 to-primary-800 relative overflow-hidden">
+        <div className="absolute inset-0 grid-pattern opacity-10" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl" />
+        
+        <div className="container-custom relative z-10">
+          <div className="max-w-3xl">
+            <span className="inline-block px-4 py-1.5 bg-white/10 text-primary-200 text-sm font-semibold rounded-full mb-6">
+              Kontakt
+            </span>
+            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+              Lassen Sie uns <span className="text-primary-200">sprechen</span>
+            </h1>
+            <p className="text-xl text-white/80 leading-relaxed">
+              Haben Sie Fragen oder möchten Sie ein Projekt besprechen? Wir freuen uns auf Ihre Nachricht.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Info Cards */}
+      <section className="py-12 -mt-8">
+        <div className="container-custom">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {contactInfo.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="card p-6 text-center group hover:border-primary-200 transition-all duration-300"
+              >
+                <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-primary-100 to-primary-200 rounded-xl flex items-center justify-center text-primary-700 group-hover:scale-110 transition-transform duration-300">
+                  {item.icon}
+                </div>
+                <div className="text-sm font-semibold text-primary-700 mb-1">{item.label}</div>
+                <div className="text-sm text-gray-600 leading-snug">{item.value}</div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form + Map */}
+      <section className="section-padding">
+        <div className="container-custom">
+          <div className="grid lg:grid-cols-5 gap-8">
+            {/* Form */}
+            <div className="lg:col-span-3">
+              <div className="card p-8 md:p-10">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Nachricht senden</h2>
+                <p className="text-gray-500 mb-8">Füllen Sie das Formular aus und wir melden uns schnellstmöglich.</p>
+                
+                <form className="space-y-5" onSubmit={(e) => { e.preventDefault(); alert('Vielen Dank für Ihre Nachricht! Wir melden uns bei Ihnen.'); }}>
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1.5">Name *</label>
+                      <input
+                        type="text"
+                        required
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all bg-gray-50 focus:bg-white"
+                        placeholder="Ihr Name"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1.5">E-Mail *</label>
+                      <input
+                        type="email"
+                        required
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all bg-gray-50 focus:bg-white"
+                        placeholder="ihre@email.de"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1.5">Betreff *</label>
+                    <select required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all bg-gray-50 focus:bg-white">
+                      <option value="">Bitte wählen...</option>
+                      <option>Allgemeine Anfrage</option>
+                      <option>MSR-Technik</option>
+                      <option>Gebäudeautomation</option>
+                      <option>Energiemanagement</option>
+                      <option>Instandhaltung</option>
+                      <option>Sonstiges</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1.5">Nachricht *</label>
+                    <textarea
+                      required
+                      rows={5}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all bg-gray-50 focus:bg-white resize-none"
+                      placeholder="Beschreiben Sie Ihr Anliegen..."
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-primary-700 to-primary-800 text-white font-semibold rounded-xl hover:from-primary-800 hover:to-primary-900 transition-all duration-300 shadow-lg shadow-primary-800/25 hover:-translate-y-0.5"
+                  >
+                    Nachricht senden
+                    <svg className="w-5 h-5 ml-2 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                    </svg>
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            {/* Sidebar */}
+            <div className="lg:col-span-2 space-y-6">
+              {/* Map placeholder */}
+              <div className="card overflow-hidden">
+                <div className="aspect-[4/3] bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                  <div className="text-center">
+                    <svg className="w-16 h-16 mx-auto text-gray-400 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                    </svg>
+                    <p className="text-gray-500 font-medium">Karte wird geladen</p>
+                    <p className="text-gray-400 text-sm">GA-Technik GmbH</p>
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <h3 className="text-xl font-semibold text-dark mb-2">Kontakt</h3>
-                <p>Tel: +49 (0) 123 456789</p>
-                <p>Email: info@ga-technik.com</p>
+              {/* Quick info */}
+              <div className="card p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-4">Schnellkontakt</h3>
+                <div className="space-y-4">
+                  <a href="mailto:Info@Ga-Technik.com" className="flex items-center gap-3 text-gray-700 hover:text-primary-700 transition-colors">
+                    <div className="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center text-primary-700 shrink-0">
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="text-sm text-gray-500">E-Mail</div>
+                      <div className="font-medium">Info@Ga-Technik.com</div>
+                    </div>
+                  </a>
+                  <a href="tel:+49123456789" className="flex items-center gap-3 text-gray-700 hover:text-primary-700 transition-colors">
+                    <div className="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center text-primary-700 shrink-0">
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="text-sm text-gray-500">Telefon</div>
+                      <div className="font-medium">+49 (0) 123 456789</div>
+                    </div>
+                  </a>
+                </div>
               </div>
 
-              <div>
-                <h3 className="text-xl font-semibold text-dark mb-2">Geschäftszeiten</h3>
-                <p>Montag - Freitag: 8:00 - 17:00 Uhr</p>
+              {/* Business hours */}
+              <div className="card p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-4">Öffnungszeiten</h3>
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">Montag – Freitag</span>
+                    <span className="font-medium text-gray-900">8:00 – 17:00</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">Samstag – Sonntag</span>
+                    <span className="font-medium text-gray-400">Geschlossen</span>
+                  </div>
+                  <div className="mt-4 pt-4 border-t border-gray-100">
+                    <div className="flex items-center gap-2 text-sm text-emerald-700">
+                      <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+                      Notfall-Support 24/7 verfügbar
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
-          <div>
-            <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-md">
-              <h2 className="text-2xl font-semibold text-primary mb-6">Nachricht senden</h2>
-
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                  <input
-                    type="email"
-                    required
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Betreff</label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                    value={formData.subject}
-                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Nachricht</label>
-                  <textarea
-                    required
-                    rows={5}
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-blue-800 transition-colors"
-                >
-                  Nachricht senden
-                </button>
-              </div>
-            </form>
-          </div>
         </div>
-      </main>
+      </section>
+
       <Footer />
     </div>
   );
