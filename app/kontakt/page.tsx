@@ -1,12 +1,14 @@
+'use client';
+
+import { useState } from 'react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import ContactForm from './ContactForm';
 
 const contactInfo = [
   {
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
       </svg>
     ),
     label: 'E-Mail',
@@ -16,7 +18,7 @@ const contactInfo = [
   {
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
       </svg>
     ),
     label: 'Telefon',
@@ -26,27 +28,40 @@ const contactInfo = [
   {
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
       </svg>
     ),
     label: 'Adresse',
-    value: 'GA-Technik GmbH, Musterstraße 123, 12345 Musterstadt',
+    value: 'Musterstraße 123, 12345 Musterstadt',
     href: '#',
   },
   {
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
     label: 'Geschäftszeiten',
-    value: 'Mo – Fr: 8:00 – 17:00 Uhr',
+    value: 'Mo–Fr: 8:00–17:00 Uhr',
     href: '#',
   },
 ];
 
 export default function Kontakt() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
@@ -62,7 +77,7 @@ export default function Kontakt() {
               Kontakt
             </span>
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              Lassen Sie uns <span className="text-primary-200">sprechen</span>
+              Sprechen Sie <br />mit uns
             </h1>
             <p className="text-xl text-white/80 leading-relaxed">
               Haben Sie Fragen oder möchten Sie ein Projekt besprechen? Wir freuen uns auf Ihre Nachricht.
@@ -71,105 +86,149 @@ export default function Kontakt() {
         </div>
       </section>
 
-      {/* Contact Info Cards */}
-      <section className="py-12 -mt-8">
-        <div className="container-custom">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {contactInfo.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="card p-6 text-center group hover:border-primary-200 transition-all duration-300"
-              >
-                <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-primary-100 to-primary-200 rounded-xl flex items-center justify-center text-primary-700 group-hover:scale-110 transition-transform duration-300">
-                  {item.icon}
-                </div>
-                <div className="text-sm font-semibold text-primary-700 mb-1">{item.label}</div>
-                <div className="text-sm text-gray-600 leading-snug">{item.value}</div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Form + Map */}
+      {/* Contact section */}
       <section className="section-padding">
         <div className="container-custom">
-          <div className="grid lg:grid-cols-5 gap-8">
-            {/* Form */}
-            <div className="lg:col-span-3">
-              <div className="card p-8 md:p-10">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Nachricht senden</h2>
-                <p className="text-gray-500 mb-8">Füllen Sie das Formular aus und wir melden uns schnellstmöglich.</p>
-                
-                <ContactForm />
+          <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
+            {/* Contact info */}
+            <div className="lg:col-span-1">
+              <h2 className="text-2xl font-bold text-gray-900 mb-8">Kontaktdaten</h2>
+              
+              <div className="space-y-6">
+                {contactInfo.map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className="flex items-start gap-4 group"
+                  >
+                    <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center text-primary-700 shrink-0 group-hover:bg-primary-200 transition-colors">
+                      {item.icon}
+                    </div>
+                    <div>
+                      <span className="text-sm text-gray-500 block">{item.label}</span>
+                      <span className="text-gray-900 font-medium group-hover:text-primary-700 transition-colors">{item.value}</span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+
+              {/* Map placeholder */}
+              <div className="mt-10 rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+                <div className="bg-gradient-to-br from-primary-50 to-primary-100 h-48 flex items-center justify-center">
+                  <div className="text-center">
+                    <svg className="w-10 h-10 text-primary-400 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                    </svg>
+                    <p className="text-sm text-primary-600 font-medium">Kartenansicht</p>
+                    <p className="text-xs text-primary-400">Musterstraße 123, Musterstadt</p>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Sidebar */}
-            <div className="lg:col-span-2 space-y-6">
-              {/* Map placeholder */}
-              <div className="card overflow-hidden">
-                <div className="aspect-[4/3] bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                  <div className="text-center">
-                    <svg className="w-16 h-16 mx-auto text-gray-400 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                    </svg>
-                    <p className="text-gray-500 font-medium">Karte wird geladen</p>
-                    <p className="text-gray-400 text-sm">GA-Technik GmbH</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Quick info */}
-              <div className="card p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-4">Schnellkontakt</h3>
-                <div className="space-y-4">
-                  <a href="mailto:Info@Ga-Technik.com" className="flex items-center gap-3 text-gray-700 hover:text-primary-700 transition-colors">
-                    <div className="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center text-primary-700 shrink-0">
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+            {/* Contact form */}
+            <div className="lg:col-span-2">
+              <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 md:p-10">
+                {submitted ? (
+                  <div className="text-center py-12">
+                    <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <svg className="w-10 h-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <div>
-                      <div className="text-sm text-gray-500">E-Mail</div>
-                      <div className="font-medium">Info@Ga-Technik.com</div>
-                    </div>
-                  </a>
-                  <a href="tel:+49123456789" className="flex items-center gap-3 text-gray-700 hover:text-primary-700 transition-colors">
-                    <div className="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center text-primary-700 shrink-0">
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <div className="text-sm text-gray-500">Telefon</div>
-                      <div className="font-medium">+49 (0) 123 456789</div>
-                    </div>
-                  </a>
-                </div>
-              </div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">Nachricht gesendet!</h3>
+                    <p className="text-gray-600 mb-6">Vielen Dank für Ihre Nachricht. Wir melden uns zeitnah bei Ihnen.</p>
+                    <button
+                      onClick={() => { setSubmitted(false); setFormData({ name: '', email: '', subject: '', message: '' }); }}
+                      className="btn-secondary"
+                    >
+                      Neue Nachricht senden
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">Nachricht senden</h2>
+                    <p className="text-gray-600 mb-8">Füllen Sie das Formular aus und wir melden uns innerhalb von 24 Stunden bei Ihnen.</p>
 
-              {/* Business hours */}
-              <div className="card p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-4">Öffnungszeiten</h3>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Montag – Freitag</span>
-                    <span className="font-medium text-gray-900">8:00 – 17:00</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Samstag – Sonntag</span>
-                    <span className="font-medium text-gray-400">Geschlossen</span>
-                  </div>
-                  <div className="mt-4 pt-4 border-t border-gray-100">
-                    <div className="flex items-center gap-2 text-sm text-emerald-700">
-                      <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-                      Notfall-Support 24/7 verfügbar
-                    </div>
-                  </div>
-                </div>
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Name *</label>
+                          <input
+                            type="text"
+                            required
+                            className="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-shadow"
+                            placeholder="Ihr Name"
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">E-Mail *</label>
+                          <input
+                            type="email"
+                            required
+                            className="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-shadow"
+                            placeholder="ihre@email.de"
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Betreff *</label>
+                        <select
+                          required
+                          className="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-shadow appearance-none bg-white"
+                          value={formData.subject}
+                          onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                        >
+                          <option value="">Bitte wählen...</option>
+                          <option value="msr">MSR-Technik</option>
+                          <option value="automation">Gebäudeautomation</option>
+                          <option value="energie">Energiemanagement</option>
+                          <option value="service">Instandhaltung & Service</option>
+                          <option value="sonstiges">Sonstiges</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Nachricht *</label>
+                        <textarea
+                          required
+                          rows={5}
+                          className="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-shadow resize-none"
+                          placeholder="Beschreiben Sie Ihr Anliegen..."
+                          value={formData.message}
+                          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        />
+                      </div>
+
+                      <div className="flex items-start gap-3">
+                        <input
+                          type="checkbox"
+                          id="privacy"
+                          required
+                          className="mt-1 w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+                        />
+                        <label htmlFor="privacy" className="text-sm text-gray-600">
+                          Ich habe die Datenschutzerklärung gelesen und stimme der Verarbeitung meiner Daten zu. *
+                        </label>
+                      </div>
+
+                      <button
+                        type="submit"
+                        className="btn-primary w-full md:w-auto"
+                      >
+                        Nachricht senden
+                        <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                        </svg>
+                      </button>
+                    </form>
+                  </>
+                )}
               </div>
             </div>
           </div>
