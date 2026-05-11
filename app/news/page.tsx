@@ -1,5 +1,11 @@
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'News & Insights | GA-Technik – Trends in Gebäudeautomation & MSR-Technik',
+  description: 'Aktuelle News und Insights zu Gebäudeautomation, MSR-Technik, KI und Energiemanagement. Bleiben Sie informiert über die neuesten Trends und Entwicklungen.',
+};
 
 const articles = [
   {
@@ -7,28 +13,28 @@ const articles = [
     date: '10. Mai 2026',
     excerpt: 'Künstliche Intelligenz revolutioniert die Gebäudeautomation. Moderne KI-Systeme können Energieverbrauchsmuster in Echtzeit analysieren und optimieren, was zu Einsparungen von bis zu 40% führen kann.',
     category: 'KI & Automation',
-    color: 'bg-blue-100 text-blue-800',
+    color: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
   },
   {
     title: 'Smart Building Standards 2026: BACnet/SC und die neue Sicherheitsära',
     date: '5. Mai 2026',
     excerpt: 'Mit BACnet/SC (Secure Connect) kommt ein neuer Standard für sichere Gebäudekommunikation. Wir erklären, was sich ändert und wie Sie Ihre Systeme zukunftssicher machen.',
     category: 'Standards',
-    color: 'bg-emerald-100 text-emerald-800',
+    color: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200',
   },
   {
     title: 'Predictive Maintenance mit Machine Learning',
     date: '28. April 2026',
     excerpt: 'Predictive Maintenance reduziert Ausfallzeiten um bis zu 50%. Durch den Einsatz von Machine Learning können Anlagenverschleiß und potenzielle Störungen frühzeitig erkannt werden.',
     category: 'Instandhaltung',
-    color: 'bg-purple-100 text-purple-800',
+    color: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
   },
   {
     title: 'Nachhaltigkeit in der Gebäudeautomation: Green Building Zertifizierung',
     date: '20. April 2026',
     excerpt: 'Green Building wird immer wichtiger. Wir zeigen, wie moderne Gebäudeautomation dabei hilft, Nachhaltigkeitsstandards zu erreichen und gleichzeitig Kosten zu senken.',
     category: 'Nachhaltigkeit',
-    color: 'bg-amber-100 text-amber-800',
+    color: 'bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200',
   },
 ];
 
@@ -36,7 +42,7 @@ const categories = ['Alle', 'KI & Automation', 'Standards', 'Instandhaltung', 'N
 
 export default function News() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <Navbar />
 
       {/* Hero */}
@@ -60,7 +66,7 @@ export default function News() {
       </section>
 
       {/* Category filter visual */}
-      <section className="py-6 bg-white border-b border-gray-100">
+      <section className="py-6 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
         <div className="container-custom">
           <div className="flex flex-wrap gap-2">
             {categories.map((cat, idx) => (
@@ -68,8 +74,8 @@ export default function News() {
                 key={cat}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors cursor-default ${
                   idx === 0
-                    ? 'bg-primary-800 text-white'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    ? 'bg-primary-800 dark:bg-primary-600 text-white'
+                    : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
                 }`}
               >
                 {cat}
@@ -92,13 +98,13 @@ export default function News() {
                     <span className={`px-3 py-1 rounded-full text-xs font-semibold ${article.color}`}>
                       {article.category}
                     </span>
-                    <span className="text-sm text-gray-400">{article.date}</span>
+                    <span className="text-sm text-gray-400 dark:text-gray-500">{article.date}</span>
                   </div>
-                  <h2 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-700 transition-colors leading-snug">
+                  <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary-700 dark:group-hover:text-primary-400 transition-colors leading-snug">
                     {article.title}
                   </h2>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-6">{article.excerpt}</p>
-                  <span className="inline-flex items-center text-primary-700 font-semibold text-sm group-hover:gap-2 transition-all">
+                  <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6">{article.excerpt}</p>
+                  <span className="inline-flex items-center text-primary-700 dark:text-primary-400 font-semibold text-sm group-hover:gap-2 transition-all">
                     Mehr lesen
                     <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -112,9 +118,9 @@ export default function News() {
       </section>
 
       {/* Newsletter CTA */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-white dark:bg-gray-900">
         <div className="container-custom">
-          <div className="relative bg-gradient-to-br from-primary-800 to-primary-900 rounded-3xl p-10 md:p-16 overflow-hidden">
+          <div className="relative bg-gradient-to-br from-primary-800 to-primary-900 dark:from-primary-900 dark:to-gray-900 rounded-3xl p-10 md:p-16 overflow-hidden">
             <div className="absolute inset-0 grid-pattern opacity-10" />
             <div className="absolute top-0 left-0 w-64 h-64 bg-primary-600/30 rounded-full blur-3xl" />
             
@@ -127,15 +133,20 @@ export default function News() {
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 Immer auf dem Laufenden
               </h2>
-              <p className="text-primary-200 text-lg mb-8">
+              <p className="text-primary-200 dark:text-primary-300 text-lg mb-8">
                 Erfahren Sie als Erster von neuen Entwicklungen in der Gebäudeautomation und MSR-Technik.
               </p>
-              <a href="/kontakt" className="inline-flex items-center justify-center px-8 py-4 bg-white text-primary-800 font-bold rounded-xl hover:bg-gray-100 transition-all duration-300 shadow-lg shadow-primary-900/25 hover:-translate-y-0.5">
-                Kontakt aufnehmen
-                <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
+              <div className="flex flex-wrap justify-center gap-4">
+                <a href="/kontakt" className="inline-flex items-center justify-center px-8 py-4 bg-white text-primary-800 font-bold rounded-xl hover:bg-gray-100 transition-all duration-300 shadow-lg shadow-primary-900/25 hover:-translate-y-0.5">
+                  Kontakt aufnehmen
+                  <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+                <a href="tel:+49123456789" className="inline-flex items-center justify-center px-8 py-4 bg-white/10 text-white font-bold rounded-xl border-2 border-white/30 hover:bg-white/20 transition-all duration-300 hover:-translate-y-0.5">
+                  📞 +49 (0) 123 456789
+                </a>
+              </div>
             </div>
           </div>
         </div>
